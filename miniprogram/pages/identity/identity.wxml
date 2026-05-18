@@ -1,0 +1,38 @@
+<view class="page">
+  <view class="header">
+    <view class="logo-wrap">
+      <view class="logo-icon"></view>
+    </view>
+    <text class="app-title">华医伴</text>
+    <text class="app-slogan">全程管理 · 专业沟通</text>
+  </view>
+
+  <view class="content">
+    <text class="title">请选择您的身份</text>
+    <text class="subtitle">我们将为您提供个性化的服务</text>
+
+    <view class="identity-list">
+      <view class="identity-card {{selectedIdentity === 'patient' ? 'selected' : ''}}" bindtap="onSelect" data-identity="patient">
+        <view class="identity-icon icon-patient"></view>
+        <view class="identity-info">
+          <text class="identity-title">我是患者</text>
+          <text class="identity-desc">本人使用华医伴服务</text>
+        </view>
+        <view class="identity-check"></view>
+      </view>
+
+      <view class="identity-card {{selectedIdentity === 'family' ? 'selected' : ''}}" bindtap="onSelect" data-identity="family">
+        <view class="identity-icon icon-family"></view>
+        <view class="identity-info">
+          <text class="identity-title">我是患者家属</text>
+          <text class="identity-desc">为家人使用华医伴服务</text>
+        </view>
+        <view class="identity-check"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <button class="confirm-btn {{selectedIdentity ? '' : 'disabled'}}" bindtap="onConfirm">确认</button>
+  </view>
+</view>

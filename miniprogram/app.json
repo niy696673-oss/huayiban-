@@ -1,0 +1,27 @@
+{
+  "pages": [
+    "pages/welcome/welcome",
+    "pages/identity/identity",
+    "pages/form/form",
+    "pages/audit/audit",
+    "pages/doctors/doctors",
+    "pages/chat/chat",
+    "pages/upload-detail/upload-detail"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "style": "v2",
+  "rendererOptions": {
+    "skyline": {
+      "defaultDisplayBlock": true,
+      "disableABTest": true,
+      "sdkVersionBegin": "3.0.0",
+      "sdkVersionEnd": "15.255.255"
+    }
+  },
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

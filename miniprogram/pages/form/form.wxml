@@ -1,0 +1,138 @@
+<view class="page">
+  <!-- Arrow Progress Bar -->
+  <view class="step-header">
+    <view class="progress-arrows">
+      <view class="arrow-step first {{currentStep > 1 ? 'done' : 'active'}}" style="z-index:3">
+        <text class="arrow-label">基本信息</text>
+        <view class="arrow-tip"></view>
+      </view>
+      <view class="arrow-step {{currentStep > 2 ? 'done' : (currentStep >= 2 ? 'active' : '')}}" style="z-index:2">
+        <view class="arrow-notch"></view>
+        <text class="arrow-label">病历资料</text>
+        <view class="arrow-tip"></view>
+      </view>
+      <view class="arrow-step last {{currentStep >= 3 ? 'active' : ''}}" style="z-index:1">
+        <view class="arrow-notch"></view>
+        <text class="arrow-label">步行视频</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Step Body -->
+  <scroll-view class="step-body" scroll-y type="list">
+    <view class="step-body-inner">
+
+    <!-- ========== Step 1: 基本信息 ========== -->
+    <block wx:if="{{currentStep === 1}}">
+      <view class="section-hint">请填写以下个人信息</view>
+      <view class="info-card" hover-class="card-hover" hover-stay-time="100">
+        <text class="info-label">身高</text>
+        <input class="info-input" type="number" placeholder="请输入（cm）" value="{{formData.basicInfo.height}}" bindinput="onInputChange" data-field="height"/>
+      </view>
+      <view class="info-card" hover-class="card-hover" hover-stay-time="100">
+        <text class="info-label">体重</text>
+        <input class="info-input" type="number" placeholder="请输入（kg）" value="{{formData.basicInfo.weight}}" bindinput="onInputChange" data-field="weight"/>
+      </view>
+      <view class="info-card" hover-class="card-hover" hover-stay-time="100">
+        <text class="info-label">常居地</text>
+        <input class="info-input" placeholder="请输入常住城市" value="{{formData.basicInfo.address}}" bindinput="onInputChange" data-field="address"/>
+      </view>
+      <view class="info-card" hover-class="card-hover" hover-stay-time="100">
+        <text class="info-label">就诊城市</text>
+        <input class="info-input" placeholder="请输入就诊城市" value="{{formData.basicInfo.city}}" bindinput="onInputChange" data-field="city"/>
+      </view>
+    </block>
+
+    <!-- ========== Step 2: 病历资料 ========== -->
+    <block wx:if="{{currentStep === 2}}">
+      <view class="section-hint">请提供以下病历资料（纸质报告拍照上传）供会诊</view>
+
+      <view class="ct-status-card">
+        <text class="ct-status-label">是否已做完最新一轮CT还未进入下一轮治疗？</text>
+        <view class="ct-status-options">
+          <view class="ct-status-option {{formData.ctStatus === 'yes' ? 'selected' : ''}}" bindtap="onCtStatusChange" data-value="yes">
+            <text class="ct-status-text">是</text>
+          </view>
+          <view class="ct-status-option {{formData.ctStatus === 'no' ? 'selected' : ''}}" bindtap="onCtStatusChange" data-value="no">
+            <text class="ct-status-text">否</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="record-list-card" hover-class="card-hover" hover-stay-time="100" bindtap="goUploadDetail">
+        <view class="record-list-icon"></view>
+        <view class="record-list-content">
+          <text class="record-list-title">病历资料上传</text>
+          <text class="record-list-desc">出入院记录 · CT/MRI/PET · 病理 · 基因检测 · 血常规等</text>
+          <view class="record-list-badges">
+            <text class="badge" wx:if="{{formData.hospitalRecords_admission.length || formData.hospitalRecords_discharge.length || formData.hospitalRecords_outpatient.length}}">出入院/门诊 {{formData.hospitalRecords_admission.length + formData.hospitalRecords_discharge.length + formData.hospitalRecords_outpatient.length}}张</text>
+            <text class="badge" wx:if="{{formData.imagingReports_ct.length || formData.imagingReports_mri.length || formData.imagingReports_pet.length}}">影像报告 {{formData.imagingReports_ct.length + formData.imagingReports_mri.length + formData.imagingReports_pet.length}}张</text>
+            <text class="badge" wx:if="{{formData.therapyRecords.length || formData.therapyText.date || formData.therapyText.drug}}">治疗记录 {{formData.therapyRecords.length}}张{{formData.therapyText.drug ? ' + 文字' : ''}}</text>
+            <text class="badge" wx:if="{{formData.pathologyReport.length}}">病理报告 {{formData.pathologyReport.length}}张</text>
+            <text class="badge" wx:if="{{formData.geneReport.length}}">基因检测 {{formData.geneReport.length}}张</text>
+            <text class="badge" wx:if="{{formData.labResults_blood.length || formData.labResults_liver.length || formData.labResults_ecg.length}}">化验结果 {{formData.labResults_blood.length + formData.labResults_liver.length + formData.labResults_ecg.length}}张</text>
+          </view>
+        </view>
+        <view class="upload-arrow"></view>
+      </view>
+
+      <view class="record-items-preview">
+        <view class="preview-item {{formData.hospitalRecords_admission.length || formData.hospitalRecords_discharge.length || formData.hospitalRecords_outpatient.length ? 'filled' : ''}}">
+          <text class="preview-num">1</text>
+          <text class="preview-title">出入院记录 / 门诊病历</text>
+          <text class="preview-count" wx:if="{{formData.hospitalRecords_admission.length || formData.hospitalRecords_discharge.length || formData.hospitalRecords_outpatient.length}}">{{formData.hospitalRecords_admission.length + formData.hospitalRecords_discharge.length + formData.hospitalRecords_outpatient.length}}张</text>
+        </view>
+        <view class="preview-item {{formData.imagingReports_ct.length || formData.imagingReports_mri.length || formData.imagingReports_pet.length ? 'filled' : ''}}">
+          <text class="preview-num">2</text>
+          <text class="preview-title">CT / 磁共振 / PET 报告</text>
+          <text class="preview-count" wx:if="{{formData.imagingReports_ct.length || formData.imagingReports_mri.length || formData.imagingReports_pet.length}}">{{formData.imagingReports_ct.length + formData.imagingReports_mri.length + formData.imagingReports_pet.length}}张</text>
+        </view>
+        <view class="preview-item {{formData.therapyRecords.length || formData.therapyText.date || formData.therapyText.drug ? 'filled' : ''}}">
+          <text class="preview-num">3</text>
+          <text class="preview-title">抗癌治疗日期及药物 / 方法</text>
+          <text class="preview-count" wx:if="{{formData.therapyRecords.length}}">{{formData.therapyRecords.length}}张</text>
+          <text class="preview-text-filled" wx:if="{{formData.therapyText.date || formData.therapyText.drug}}">已填写</text>
+        </view>
+        <view class="preview-item {{formData.pathologyReport.length ? 'filled' : ''}}">
+          <text class="preview-num">4</text>
+          <text class="preview-title">病理报告</text>
+          <text class="preview-count" wx:if="{{formData.pathologyReport.length}}">{{formData.pathologyReport.length}}张</text>
+        </view>
+        <view class="preview-item {{formData.geneReport.length ? 'filled' : ''}}">
+          <text class="preview-num">5</text>
+          <text class="preview-title">基因检测结果（前 3~5 页）</text>
+          <text class="preview-count" wx:if="{{formData.geneReport.length}}">{{formData.geneReport.length}}张</text>
+        </view>
+        <view class="preview-item {{formData.labResults_blood.length || formData.labResults_liver.length || formData.labResults_ecg.length ? 'filled' : ''}}">
+          <text class="preview-num">6</text>
+          <text class="preview-title">血常规 / 肝肾功能 / 心电图</text>
+          <text class="preview-count" wx:if="{{formData.labResults_blood.length || formData.labResults_liver.length || formData.labResults_ecg.length}}">{{formData.labResults_blood.length + formData.labResults_liver.length + formData.labResults_ecg.length}}张</text>
+        </view>
+      </view>
+    </block>
+
+    <!-- ========== Step 3: 步行视频 ========== -->
+    <block wx:if="{{currentStep === 3}}">
+      <view class="section-hint">上传一段步行视频，用于评估体质状态</view>
+      <view class="upload-zone" hover-class="card-hover" hover-stay-time="100" bindtap="onUploadVideo">
+        <view class="upload-circle">
+          <view class="icon-video"></view>
+        </view>
+        <text class="upload-label">{{formData.walkVideo ? '已上传，点击重新选择' : '点击上传视频'}}</text>
+        <text class="upload-hint">建议1分钟内的步行视频</text>
+      </view>
+    </block>
+
+    </view>
+  </scroll-view>
+
+  <!-- Bottom Navigation -->
+  <view class="step-nav">
+    <button class="nav-btn back" wx:if="{{currentStep > 1}}" bindtap="prevStep">上一步</button>
+    <view wx:else></view>
+    <button class="nav-btn next" wx:if="{{currentStep < totalSteps}}" bindtap="nextStep">
+      {{isCurrentStepFilled ? '下一步' : '跳过'}}
+    </button>
+    <button class="nav-btn submit" wx:elif="{{currentStep === totalSteps}}" bindtap="onSubmit" loading="{{submitting}}">提交审核</button>
+  </view>
+</view>

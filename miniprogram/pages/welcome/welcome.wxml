@@ -1,0 +1,81 @@
+<view class="page">
+  <scroll-view class="scroll-area" scroll-y type="list">
+    <!-- Logo & Title -->
+    <view class="hero">
+      <view class="logo-wrap">
+        <view class="logo-icon"></view>
+      </view>
+      <text class="app-title">华医伴</text>
+      <text class="app-slogan">全程管理 · 专业沟通</text>
+    </view>
+
+    <!-- Flow Steps -->
+    <view class="section">
+      <text class="section-title">就诊流程</text>
+      <view class="flow-row">
+        <view class="flow-step">
+          <view class="flow-icon icon-upload"></view>
+          <text class="flow-label">提交资料</text>
+        </view>
+        <view class="flow-arrow"></view>
+        <view class="flow-step">
+          <view class="flow-icon icon-review"></view>
+          <text class="flow-label">审核评估</text>
+        </view>
+        <view class="flow-arrow"></view>
+        <view class="flow-step">
+          <view class="flow-icon icon-chat"></view>
+          <text class="flow-label">在线诊疗</text>
+        </view>
+      </view>
+      <view class="flow-detail-list">
+        <view class="flow-detail">
+          <view class="flow-num"><text>1</text></view>
+          <text class="flow-text">上传检查报告、影像资料等病历文件</text>
+        </view>
+        <view class="flow-detail">
+          <view class="flow-num"><text>2</text></view>
+          <text class="flow-text">医疗团队将在1-3个工作日内审核</text>
+        </view>
+        <view class="flow-detail">
+          <view class="flow-num"><text>3</text></view>
+          <text class="flow-text">审核通过后，与专属医生一对一沟通</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Notice -->
+    <view class="section">
+      <text class="section-title">使用须知</text>
+      <view class="notice-card">
+        <view class="notice-item">
+          <view class="notice-dot"></view>
+          <text class="notice-text">本平台仅提供线上诊疗咨询服务，不替代线下就诊</text>
+        </view>
+        <view class="notice-item">
+          <view class="notice-dot"></view>
+          <text class="notice-text">请上传真实、清晰的病历资料，以便医生准确评估</text>
+        </view>
+        <view class="notice-item">
+          <view class="notice-dot"></view>
+          <text class="notice-text">您的个人信息将严格保密，仅用于诊疗服务</text>
+        </view>
+        <view class="notice-item">
+          <view class="notice-dot"></view>
+          <text class="notice-text">如遇紧急情况，请立即前往医院急诊就医</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- Bottom Button -->
+  <view class="bottom-bar">
+    <view class="agree-row" bindtap="toggleAgree">
+      <view class="checkbox {{agreed ? 'checked' : ''}}">
+        <text wx:if="{{agreed}}" class="check-mark">✓</text>
+      </view>
+      <text class="agree-text">我已阅读并同意以上须知</text>
+    </view>
+    <button class="start-btn {{agreed ? '' : 'disabled'}}" bindtap="onStart">开始使用</button>
+  </view>
+</view>

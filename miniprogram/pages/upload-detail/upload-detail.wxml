@@ -1,0 +1,399 @@
+<view class="page">
+  <!-- Header -->
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">
+      <view class="back-icon"></view>
+    </view>
+    <text class="header-title">病历资料上传</text>
+    <view class="header-right"></view>
+  </view>
+
+  <!-- Content -->
+  <scroll-view class="content" scroll-y type="list">
+    <view class="content-inner">
+
+      <!-- 顶部说明 -->
+      <view class="page-desc">
+        <view class="desc-icon"></view>
+        <text class="desc-text">请提供以下资料（纸质报告拍照上传）供会诊</text>
+      </view>
+
+      <!-- =================== 1. 出入院记录 / 门诊病历 =================== -->
+      <view class="item-card">
+        <view class="item-header">
+          <view class="item-num">1</view>
+          <view class="item-title-group">
+            <text class="item-title">出入院记录 / 门诊病历</text>
+            <text class="item-subtitle">最后一次住院的出、入院记录，或最后一次门诊病历</text>
+          </view>
+        </view>
+
+        <!-- 子项：入院记录 -->
+        <view class="sub-item {{expanded !== 'hospitalRecords_admission' ? 'collapsed' : ''}}" bindtap="toggleExpand" data-key="hospitalRecords_admission">
+          <view class="sub-item-left">
+            <view class="sub-dot {{images.hospitalRecords_admission.length ? 'dot-filled' : ''}}"></view>
+            <text class="sub-item-label">入院记录</text>
+          </view>
+          <view class="sub-item-right">
+            <text class="sub-count" wx:if="{{images.hospitalRecords_admission.length}}">{{images.hospitalRecords_admission.length}}张</text>
+            <view class="sub-arrow {{expanded === 'hospitalRecords_admission' ? 'arrow-up' : ''}}"></view>
+          </view>
+        </view>
+        <view class="sub-upload-area" wx:if="{{expanded === 'hospitalRecords_admission'}}">
+          <view class="image-grid" wx:if="{{images.hospitalRecords_admission.length}}">
+            <view class="image-item" wx:for="{{images.hospitalRecords_admission}}" wx:key="*this">
+              <image src="{{item}}" mode="aspectFill" bindtap="onPreview" data-field="hospitalRecords_admission" data-url="{{item}}"></image>
+              <view class="image-del" catchtap="onRemove" data-field="hospitalRecords_admission" data-index="{{index}}">×</view>
+            </view>
+          </view>
+          <view class="upload-area-sm" bindtap="onAdd" data-field="hospitalRecords_admission">
+            <view class="upload-icon-sm"></view>
+            <text class="upload-text-sm">点击上传</text>
+          </view>
+        </view>
+
+        <!-- 子项：出院记录 -->
+        <view class="sub-item {{expanded !== 'hospitalRecords_discharge' ? 'collapsed' : ''}}" bindtap="toggleExpand" data-key="hospitalRecords_discharge">
+          <view class="sub-item-left">
+            <view class="sub-dot {{images.hospitalRecords_discharge.length ? 'dot-filled' : ''}}"></view>
+            <text class="sub-item-label">出院记录</text>
+          </view>
+          <view class="sub-item-right">
+            <text class="sub-count" wx:if="{{images.hospitalRecords_discharge.length}}">{{images.hospitalRecords_discharge.length}}张</text>
+            <view class="sub-arrow {{expanded === 'hospitalRecords_discharge' ? 'arrow-up' : ''}}"></view>
+          </view>
+        </view>
+        <view class="sub-upload-area" wx:if="{{expanded === 'hospitalRecords_discharge'}}">
+          <view class="image-grid" wx:if="{{images.hospitalRecords_discharge.length}}">
+            <view class="image-item" wx:for="{{images.hospitalRecords_discharge}}" wx:key="*this">
+              <image src="{{item}}" mode="aspectFill" bindtap="onPreview" data-field="hospitalRecords_discharge" data-url="{{item}}"></image>
+              <view class="image-del" catchtap="onRemove" data-field="hospitalRecords_discharge" data-index="{{index}}">×</view>
+            </view>
+          </view>
+          <view class="upload-area-sm" bindtap="onAdd" data-field="hospitalRecords_discharge">
+            <view class="upload-icon-sm"></view>
+            <text class="upload-text-sm">点击上传</text>
+          </view>
+        </view>
+
+        <!-- 子项：门诊病历 -->
+        <view class="sub-item {{expanded !== 'hospitalRecords_outpatient' ? 'collapsed' : ''}}" bindtap="toggleExpand" data-key="hospitalRecords_outpatient">
+          <view class="sub-item-left">
+            <view class="sub-dot {{images.hospitalRecords_outpatient.length ? 'dot-filled' : ''}}"></view>
+            <text class="sub-item-label">门诊病历</text>
+          </view>
+          <view class="sub-item-right">
+            <text class="sub-count" wx:if="{{images.hospitalRecords_outpatient.length}}">{{images.hospitalRecords_outpatient.length}}张</text>
+            <view class="sub-arrow {{expanded === 'hospitalRecords_outpatient' ? 'arrow-up' : ''}}"></view>
+          </view>
+        </view>
+        <view class="sub-upload-area" wx:if="{{expanded === 'hospitalRecords_outpatient'}}">
+          <view class="image-grid" wx:if="{{images.hospitalRecords_outpatient.length}}">
+            <view class="image-item" wx:for="{{images.hospitalRecords_outpatient}}" wx:key="*this">
+              <image src="{{item}}" mode="aspectFill" bindtap="onPreview" data-field="hospitalRecords_outpatient" data-url="{{item}}"></image>
+              <view class="image-del" catchtap="onRemove" data-field="hospitalRecords_outpatient" data-index="{{index}}">×</view>
+            </view>
+          </view>
+          <view class="upload-area-sm" bindtap="onAdd" data-field="hospitalRecords_outpatient">
+            <view class="upload-icon-sm"></view>
+            <text class="upload-text-sm">点击上传</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- =================== 2. CT / 磁共振 / PET 报告 =================== -->
+      <view class="item-card">
+        <view class="item-header">
+          <view class="item-num">2</view>
+          <view class="item-title-group">
+            <text class="item-title">CT / 磁共振 / PET 报告</text>
+            <text class="item-subtitle">最近两次 CT、磁共振、PET 报告</text>
+          </view>
+        </view>
+
+        <!-- 子项：CT报告 -->
+        <view class="sub-item {{expanded !== 'imagingReports_ct' ? 'collapsed' : ''}}" bindtap="toggleExpand" data-key="imagingReports_ct">
+          <view class="sub-item-left">
+            <view class="sub-dot {{images.imagingReports_ct.length ? 'dot-filled' : ''}}"></view>
+            <text class="sub-item-label">CT报告</text>
+          </view>
+          <view class="sub-item-right">
+            <text class="sub-count" wx:if="{{images.imagingReports_ct.length}}">{{images.imagingReports_ct.length}}张</text>
+            <view class="sub-arrow {{expanded === 'imagingReports_ct' ? 'arrow-up' : ''}}"></view>
+          </view>
+        </view>
+        <view class="sub-upload-area" wx:if="{{expanded === 'imagingReports_ct'}}">
+          <view class="image-grid" wx:if="{{images.imagingReports_ct.length}}">
+            <view class="image-item" wx:for="{{images.imagingReports_ct}}" wx:key="*this">
+              <image src="{{item}}" mode="aspectFill" bindtap="onPreview" data-field="imagingReports_ct" data-url="{{item}}"></image>
+              <view class="image-del" catchtap="onRemove" data-field="imagingReports_ct" data-index="{{index}}">×</view>
+            </view>
+          </view>
+          <view class="upload-area-sm" bindtap="onAdd" data-field="imagingReports_ct">
+            <view class="upload-icon-sm"></view>
+            <text class="upload-text-sm">点击上传</text>
+          </view>
+        </view>
+
+        <!-- 子项：磁共振(MRI)报告 -->
+        <view class="sub-item {{expanded !== 'imagingReports_mri' ? 'collapsed' : ''}}" bindtap="toggleExpand" data-key="imagingReports_mri">
+          <view class="sub-item-left">
+            <view class="sub-dot {{images.imagingReports_mri.length ? 'dot-filled' : ''}}"></view>
+            <text class="sub-item-label">磁共振(MRI)报告</text>
+          </view>
+          <view class="sub-item-right">
+            <text class="sub-count" wx:if="{{images.imagingReports_mri.length}}">{{images.imagingReports_mri.length}}张</text>
+            <view class="sub-arrow {{expanded === 'imagingReports_mri' ? 'arrow-up' : ''}}"></view>
+          </view>
+        </view>
+        <view class="sub-upload-area" wx:if="{{expanded === 'imagingReports_mri'}}">
+          <view class="image-grid" wx:if="{{images.imagingReports_mri.length}}">
+            <view class="image-item" wx:for="{{images.imagingReports_mri}}" wx:key="*this">
+              <image src="{{item}}" mode="aspectFill" bindtap="onPreview" data-field="imagingReports_mri" data-url="{{item}}"></image>
+              <view class="image-del" catchtap="onRemove" data-field="imagingReports_mri" data-index="{{index}}">×</view>
+            </view>
+          </view>
+          <view class="upload-area-sm" bindtap="onAdd" data-field="imagingReports_mri">
+            <view class="upload-icon-sm"></view>
+            <text class="upload-text-sm">点击上传</text>
+          </view>
+        </view>
+
+        <!-- 子项：PET报告 -->
+        <view class="sub-item {{expanded !== 'imagingReports_pet' ? 'collapsed' : ''}}" bindtap="toggleExpand" data-key="imagingReports_pet">
+          <view class="sub-item-left">
+            <view class="sub-dot {{images.imagingReports_pet.length ? 'dot-filled' : ''}}"></view>
+            <text class="sub-item-label">PET报告</text>
+          </view>
+          <view class="sub-item-right">
+            <text class="sub-count" wx:if="{{images.imagingReports_pet.length}}">{{images.imagingReports_pet.length}}张</text>
+            <view class="sub-arrow {{expanded === 'imagingReports_pet' ? 'arrow-up' : ''}}"></view>
+          </view>
+        </view>
+        <view class="sub-upload-area" wx:if="{{expanded === 'imagingReports_pet'}}">
+          <view class="image-grid" wx:if="{{images.imagingReports_pet.length}}">
+            <view class="image-item" wx:for="{{images.imagingReports_pet}}" wx:key="*this">
+              <image src="{{item}}" mode="aspectFill" bindtap="onPreview" data-field="imagingReports_pet" data-url="{{item}}"></image>
+              <view class="image-del" catchtap="onRemove" data-field="imagingReports_pet" data-index="{{index}}">×</view>
+            </view>
+          </view>
+          <view class="upload-area-sm" bindtap="onAdd" data-field="imagingReports_pet">
+            <view class="upload-icon-sm"></view>
+            <text class="upload-text-sm">点击上传</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- =================== 3. 抗癌治疗日期及药物 / 方法 =================== -->
+      <view class="item-card">
+        <view class="item-header">
+          <view class="item-num">3</view>
+          <view class="item-title-group">
+            <text class="item-title">抗癌治疗日期及药物 / 方法</text>
+            <text class="item-subtitle">最后一次抗癌治疗日期及药物或方法</text>
+          </view>
+        </view>
+
+        <!-- 文字描述区域 -->
+        <view class="therapy-text-area">
+          <view class="therapy-input-row">
+            <text class="therapy-label">治疗日期</text>
+            <input class="therapy-input" placeholder="请输入，如：2025年3月" value="{{therapyText.date}}" bindinput="onTherapyInput" data-type="date"/>
+          </view>
+          <view class="therapy-input-row">
+            <text class="therapy-label">药物 / 方法</text>
+            <input class="therapy-input" placeholder="请输入药物名称或治疗方法" value="{{therapyText.drug}}" bindinput="onTherapyInput" data-type="drug"/>
+          </view>
+          <view class="therapy-input-row" style="border:none">
+            <text class="therapy-label">其他说明</text>
+            <input class="therapy-input" placeholder="选填，可补充剂量、疗程等" value="{{therapyText.note}}" bindinput="onTherapyInput" data-type="note"/>
+          </view>
+        </view>
+
+        <!-- 子项：治疗相关图片 -->
+        <view class="sub-item {{expanded !== 'therapyRecords' ? 'collapsed' : ''}}" bindtap="toggleExpand" data-key="therapyRecords">
+          <view class="sub-item-left">
+            <view class="sub-dot {{images.therapyRecords.length ? 'dot-filled' : ''}}"></view>
+            <text class="sub-item-label">治疗相关图片</text>
+          </view>
+          <view class="sub-item-right">
+            <text class="sub-count" wx:if="{{images.therapyRecords.length}}">{{images.therapyRecords.length}}张</text>
+            <view class="sub-arrow {{expanded === 'therapyRecords' ? 'arrow-up' : ''}}"></view>
+          </view>
+        </view>
+        <view class="sub-upload-area" wx:if="{{expanded === 'therapyRecords'}}">
+          <view class="image-grid" wx:if="{{images.therapyRecords.length}}">
+            <view class="image-item" wx:for="{{images.therapyRecords}}" wx:key="*this">
+              <image src="{{item}}" mode="aspectFill" bindtap="onPreview" data-field="therapyRecords" data-url="{{item}}"></image>
+              <view class="image-del" catchtap="onRemove" data-field="therapyRecords" data-index="{{index}}">×</view>
+            </view>
+          </view>
+          <view class="upload-area-sm" bindtap="onAdd" data-field="therapyRecords">
+            <view class="upload-icon-sm"></view>
+            <text class="upload-text-sm">点击上传</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- =================== 4. 病理报告 =================== -->
+      <view class="item-card">
+        <view class="item-header">
+          <view class="item-num">4</view>
+          <view class="item-title-group">
+            <text class="item-title">病理报告</text>
+            <text class="item-subtitle">病理诊断报告</text>
+          </view>
+        </view>
+
+        <view class="sub-item {{expanded !== 'pathologyReport' ? 'collapsed' : ''}}" bindtap="toggleExpand" data-key="pathologyReport">
+          <view class="sub-item-left">
+            <view class="sub-dot {{images.pathologyReport.length ? 'dot-filled' : ''}}"></view>
+            <text class="sub-item-label">病理报告</text>
+          </view>
+          <view class="sub-item-right">
+            <text class="sub-count" wx:if="{{images.pathologyReport.length}}">{{images.pathologyReport.length}}张</text>
+            <view class="sub-arrow {{expanded === 'pathologyReport' ? 'arrow-up' : ''}}"></view>
+          </view>
+        </view>
+        <view class="sub-upload-area" wx:if="{{expanded === 'pathologyReport'}}">
+          <view class="image-grid" wx:if="{{images.pathologyReport.length}}">
+            <view class="image-item" wx:for="{{images.pathologyReport}}" wx:key="*this">
+              <image src="{{item}}" mode="aspectFill" bindtap="onPreview" data-field="pathologyReport" data-url="{{item}}"></image>
+              <view class="image-del" catchtap="onRemove" data-field="pathologyReport" data-index="{{index}}">×</view>
+            </view>
+          </view>
+          <view class="upload-area-sm" bindtap="onAdd" data-field="pathologyReport">
+            <view class="upload-icon-sm"></view>
+            <text class="upload-text-sm">点击上传</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- =================== 5. 基因检测结果 =================== -->
+      <view class="item-card">
+        <view class="item-header">
+          <view class="item-num">5</view>
+          <view class="item-title-group">
+            <text class="item-title">基因检测结果</text>
+            <text class="item-subtitle">前 3~5 页基因检测报告</text>
+          </view>
+        </view>
+
+        <view class="sub-item {{expanded !== 'geneReport' ? 'collapsed' : ''}}" bindtap="toggleExpand" data-key="geneReport">
+          <view class="sub-item-left">
+            <view class="sub-dot {{images.geneReport.length ? 'dot-filled' : ''}}"></view>
+            <text class="sub-item-label">基因检测报告</text>
+          </view>
+          <view class="sub-item-right">
+            <text class="sub-count" wx:if="{{images.geneReport.length}}">{{images.geneReport.length}}张</text>
+            <view class="sub-arrow {{expanded === 'geneReport' ? 'arrow-up' : ''}}"></view>
+          </view>
+        </view>
+        <view class="sub-upload-area" wx:if="{{expanded === 'geneReport'}}">
+          <view class="image-grid" wx:if="{{images.geneReport.length}}">
+            <view class="image-item" wx:for="{{images.geneReport}}" wx:key="*this">
+              <image src="{{item}}" mode="aspectFill" bindtap="onPreview" data-field="geneReport" data-url="{{item}}"></image>
+              <view class="image-del" catchtap="onRemove" data-field="geneReport" data-index="{{index}}">×</view>
+            </view>
+          </view>
+          <view class="upload-area-sm" bindtap="onAdd" data-field="geneReport">
+            <view class="upload-icon-sm"></view>
+            <text class="upload-text-sm">点击上传</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- =================== 6. 血常规 / 肝肾功能 / 心电图 =================== -->
+      <view class="item-card">
+        <view class="item-header">
+          <view class="item-num">6</view>
+          <view class="item-title-group">
+            <text class="item-title">血常规 / 肝肾功能 / 心电图</text>
+            <text class="item-subtitle">近期血常规、肝肾功能、心电图报告</text>
+          </view>
+        </view>
+
+        <!-- 子项：血常规 -->
+        <view class="sub-item {{expanded !== 'labResults_blood' ? 'collapsed' : ''}}" bindtap="toggleExpand" data-key="labResults_blood">
+          <view class="sub-item-left">
+            <view class="sub-dot {{images.labResults_blood.length ? 'dot-filled' : ''}}"></view>
+            <text class="sub-item-label">血常规</text>
+          </view>
+          <view class="sub-item-right">
+            <text class="sub-count" wx:if="{{images.labResults_blood.length}}">{{images.labResults_blood.length}}张</text>
+            <view class="sub-arrow {{expanded === 'labResults_blood' ? 'arrow-up' : ''}}"></view>
+          </view>
+        </view>
+        <view class="sub-upload-area" wx:if="{{expanded === 'labResults_blood'}}">
+          <view class="image-grid" wx:if="{{images.labResults_blood.length}}">
+            <view class="image-item" wx:for="{{images.labResults_blood}}" wx:key="*this">
+              <image src="{{item}}" mode="aspectFill" bindtap="onPreview" data-field="labResults_blood" data-url="{{item}}"></image>
+              <view class="image-del" catchtap="onRemove" data-field="labResults_blood" data-index="{{index}}">×</view>
+            </view>
+          </view>
+          <view class="upload-area-sm" bindtap="onAdd" data-field="labResults_blood">
+            <view class="upload-icon-sm"></view>
+            <text class="upload-text-sm">点击上传</text>
+          </view>
+        </view>
+
+        <!-- 子项：肝肾功能 -->
+        <view class="sub-item {{expanded !== 'labResults_liver' ? 'collapsed' : ''}}" bindtap="toggleExpand" data-key="labResults_liver">
+          <view class="sub-item-left">
+            <view class="sub-dot {{images.labResults_liver.length ? 'dot-filled' : ''}}"></view>
+            <text class="sub-item-label">肝肾功能</text>
+          </view>
+          <view class="sub-item-right">
+            <text class="sub-count" wx:if="{{images.labResults_liver.length}}">{{images.labResults_liver.length}}张</text>
+            <view class="sub-arrow {{expanded === 'labResults_liver' ? 'arrow-up' : ''}}"></view>
+          </view>
+        </view>
+        <view class="sub-upload-area" wx:if="{{expanded === 'labResults_liver'}}">
+          <view class="image-grid" wx:if="{{images.labResults_liver.length}}">
+            <view class="image-item" wx:for="{{images.labResults_liver}}" wx:key="*this">
+              <image src="{{item}}" mode="aspectFill" bindtap="onPreview" data-field="labResults_liver" data-url="{{item}}"></image>
+              <view class="image-del" catchtap="onRemove" data-field="labResults_liver" data-index="{{index}}">×</view>
+            </view>
+          </view>
+          <view class="upload-area-sm" bindtap="onAdd" data-field="labResults_liver">
+            <view class="upload-icon-sm"></view>
+            <text class="upload-text-sm">点击上传</text>
+          </view>
+        </view>
+
+        <!-- 子项：心电图 -->
+        <view class="sub-item {{expanded !== 'labResults_ecg' ? 'collapsed' : ''}}" bindtap="toggleExpand" data-key="labResults_ecg">
+          <view class="sub-item-left">
+            <view class="sub-dot {{images.labResults_ecg.length ? 'dot-filled' : ''}}"></view>
+            <text class="sub-item-label">心电图</text>
+          </view>
+          <view class="sub-item-right">
+            <text class="sub-count" wx:if="{{images.labResults_ecg.length}}">{{images.labResults_ecg.length}}张</text>
+            <view class="sub-arrow {{expanded === 'labResults_ecg' ? 'arrow-up' : ''}}"></view>
+          </view>
+        </view>
+        <view class="sub-upload-area" wx:if="{{expanded === 'labResults_ecg'}}">
+          <view class="image-grid" wx:if="{{images.labResults_ecg.length}}">
+            <view class="image-item" wx:for="{{images.labResults_ecg}}" wx:key="*this">
+              <image src="{{item}}" mode="aspectFill" bindtap="onPreview" data-field="labResults_ecg" data-url="{{item}}"></image>
+              <view class="image-del" catchtap="onRemove" data-field="labResults_ecg" data-index="{{index}}">×</view>
+            </view>
+          </view>
+          <view class="upload-area-sm" bindtap="onAdd" data-field="labResults_ecg">
+            <view class="upload-icon-sm"></view>
+            <text class="upload-text-sm">点击上传</text>
+          </view>
+        </view>
+      </view>
+
+    </view>
+  </scroll-view>
+
+  <!-- Bottom Button -->
+  <view class="bottom-bar">
+    <view class="bottom-tip" wx:if="{{!hasAnyImage}}">请至少上传一项资料</view>
+    <button class="save-btn {{hasAnyImage ? 'active' : ''}}" bindtap="onSave" loading="{{saving}}">
+      保存并返回
+    </button>
+  </view>
+</view>

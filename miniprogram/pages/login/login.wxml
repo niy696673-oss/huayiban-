@@ -1,0 +1,16 @@
+<navigation-bar title="华医伴" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<view class="container">
+  <view class="logo-section">
+    <image class="logo" src="/images/logo.png" mode="aspectFit"></image>
+    <text class="title">华医伴</text>
+    <text class="subtitle">全程管理 · 专业沟通</text>
+  </view>
+  
+  <view class="login-section">
+    <button class="login-btn" bindtap="onLogin" loading="{{loading}}">
+      <image class="wechat-icon" src="/images/wechat.png" mode="aspectFit"></image>
+      <text>微信一键登录</text>
+    </button>
+    <text class="agreement">登录即表示同意《用户协议》和《隐私政策》</text>
+  </view>
+</view>

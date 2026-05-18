@@ -1,0 +1,466 @@
+.page {
+  height: 100vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================
+   Arrow Progress Bar
+   ============================ */
+.step-header {
+  padding: 32rpx;
+  padding-top: 128rpx;
+  flex-shrink: 0;
+}
+
+.progress-arrows {
+  display: flex;
+  height: 72rpx;
+}
+
+.arrow-step {
+  position: relative;
+  flex: 1;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #E8E8ED;
+  overflow: visible;
+
+  .arrow-label {
+    font-size: 26rpx;
+    font-weight: 600;
+    color: #86868b;
+    position: relative;
+    z-index: 1;
+  }
+
+  .arrow-tip {
+    position: absolute;
+    right: -24rpx;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-top: 36rpx solid transparent;
+    border-bottom: 36rpx solid transparent;
+    border-left: 24rpx solid #E8E8ED;
+  }
+
+  .arrow-notch {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-top: 36rpx solid transparent;
+    border-bottom: 36rpx solid transparent;
+    border-left: 24rpx solid #fff;
+    z-index: 1;
+  }
+
+  &.first {
+    border-radius: 12rpx 0 0 12rpx;
+  }
+
+  &.last {
+    border-radius: 0 12rpx 12rpx 0;
+  }
+
+  &.done {
+    background: #007A52;
+    .arrow-label { color: #fff; }
+    .arrow-tip { border-left-color: #007A52; }
+  }
+
+  &.active {
+    background: #00A870;
+    .arrow-label { color: #fff; }
+    .arrow-tip { border-left-color: #00A870; }
+  }
+}
+
+/* ============================
+   Step Body
+   ============================ */
+.step-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.step-body-inner {
+  padding: 0 32rpx;
+}
+
+.section-hint {
+  font-size: 26rpx;
+  color: #86868b;
+  margin-bottom: 24rpx;
+  padding-left: 4rpx;
+  animation: fadeIn 0.35s ease both;
+}
+
+/* ============================
+   Record List Card (Step 1)
+   ============================ */
+.record-list-card {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #e8f5f0 0%, #e3f2ee 100%);
+  border-radius: 20rpx;
+  padding: 28rpx 24rpx;
+  margin-bottom: 24rpx;
+  transition: transform 0.15s ease, background 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease;
+  animation: fadeIn 0.4s ease both;
+
+  &:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+}
+
+.record-list-icon {
+  width: 80rpx;
+  height: 80rpx;
+  min-height: 80rpx;
+  background-color: rgba(0, 168, 112, 0.15);
+  border-radius: 20rpx;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300A870' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3Cline x1='16' y1='13' x2='8' y2='13'/%3E%3Cline x1='16' y1='17' x2='8' y2='17'/%3E%3Cpolyline points='10 9 9 9 8 9'/%3E%3C/svg%3E");
+  background-size: 40rpx 40rpx;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.record-list-content {
+  flex: 1;
+  min-width: 0;
+
+  .record-list-title {
+    display: block;
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #007A52;
+    margin-bottom: 6rpx;
+  }
+
+  .record-list-desc {
+    display: block;
+    font-size: 22rpx;
+    color: #007A52;
+    opacity: 0.75;
+    margin-bottom: 12rpx;
+  }
+}
+
+.record-list-badges {
+  display: flex;
+  flex-wrap: wrap;
+
+  .badge {
+    font-size: 20rpx;
+    color: #00A870;
+    background: rgba(0, 168, 112, 0.12);
+    border-radius: 8rpx;
+    padding: 4rpx 10rpx;
+    margin-right: 8rpx;
+    margin-bottom: 4rpx;
+  }
+}
+
+.upload-arrow {
+  width: 28rpx;
+  height: 28rpx;
+  min-width: 28rpx;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300A870' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-left: 8rpx;
+}
+
+/* ============================
+   Record Items Preview (Step 1)
+   ============================ */
+.record-items-preview {
+  animation: fadeIn 0.4s ease both;
+  animation-delay: 0.1s;
+}
+
+.preview-item {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx 24rpx;
+  margin-bottom: 16rpx;
+  transition: transform 0.12s ease, background 0.12s ease;
+
+  &:active {
+    background: #f5f6f8;
+    transform: scale(0.99);
+  }
+
+  &.filled {
+    background: #f0faf6;
+
+    .preview-num {
+      background: #00A870;
+    }
+
+    .preview-count {
+      display: block;
+    }
+  }
+}
+
+.card-hover {
+  background: #eef0f2;
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.preview-num {
+  width: 44rpx;
+  height: 44rpx;
+  min-height: 44rpx;
+  background: #d1d1d6;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+
+.preview-title {
+  flex: 1;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #1d1d1f;
+}
+
+.preview-count {
+  display: none;
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #00A870;
+  margin-left: 12rpx;
+  flex-shrink: 0;
+}
+
+.preview-text-filled {
+  display: none;
+  font-size: 22rpx;
+  font-weight: 600;
+  color: #00A870;
+  background: rgba(0, 168, 112, 0.12);
+  border-radius: 8rpx;
+  padding: 4rpx 10rpx;
+  margin-left: 8rpx;
+  flex-shrink: 0;
+}
+
+.preview-item.filled .preview-text-filled {
+  display: block;
+}
+
+
+/* ============================
+   Info Card (Step 2)
+   ============================ */
+.info-card {
+  background: #f9fafb;
+  border-radius: 20rpx;
+  transition: transform 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+  animation: fadeIn 0.4s ease both;
+
+  &:nth-child(2) { animation-delay: 0.05s; }
+  &:nth-child(3) { animation-delay: 0.10s; }
+  &:nth-child(4) { animation-delay: 0.15s; }
+  &:nth-child(5) { animation-delay: 0.20s; }
+  padding: 28rpx 32rpx;
+  margin-bottom: 20rpx;
+
+  .info-label {
+    display: block;
+    font-size: 24rpx;
+    font-weight: 500;
+    color: #86868b;
+    margin-bottom: 16rpx;
+    letter-spacing: 1rpx;
+  }
+
+  .info-input {
+    font-size: 34rpx;
+    font-weight: 500;
+    color: #1d1d1f;
+
+    &::placeholder {
+      color: #c7c7cc;
+      font-weight: 400;
+    }
+  }
+}
+
+/* ============================
+   CT Status Card
+   ============================ */
+.ct-status-card {
+  background: linear-gradient(135deg, #f0f9f6 0%, #e8f5f0 100%);
+  border-radius: 20rpx;
+  padding: 28rpx 32rpx;
+  margin-bottom: 24rpx;
+  animation: fadeIn 0.35s ease both;
+
+  .ct-status-label {
+    display: block;
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin-bottom: 20rpx;
+    line-height: 1.4;
+  }
+}
+
+.ct-status-options {
+  display: flex;
+  gap: 20rpx;
+}
+
+.ct-status-option {
+  flex: 1;
+  height: 80rpx;
+  background: #fff;
+  border: 2rpx solid #d1d1d6;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  &.selected {
+    background: #00A870;
+    border-color: #00A870;
+
+    .ct-status-text {
+      color: #fff;
+    }
+  }
+
+  .ct-status-text {
+    font-size: 30rpx;
+    font-weight: 600;
+    color: #1d1d1f;
+    transition: color 0.2s ease;
+  }
+}
+
+/* ============================
+   Upload Zone (Step 3)
+   ============================ */
+.upload-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400rpx;
+  background: #f9fafb;
+  border: 2rpx dashed #d1d1d6;
+  border-radius: 24rpx;
+  transition: transform 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+  animation: fadeIn 0.4s ease both;
+
+  .upload-circle {
+    width: 112rpx;
+    height: 112rpx;
+    background: #00A870;
+    border-radius: 56rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28rpx;
+
+    .icon-video {
+      width: 48rpx;
+      height: 48rpx;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='23 7 16 12 23 17 23 7'/%3E%3Crect x='1' y='5' width='15' height='14' rx='2' ry='2'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
+  .upload-label {
+    font-size: 32rpx;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin-bottom: 8rpx;
+  }
+
+  .upload-hint {
+    font-size: 26rpx;
+    color: #a1a1a6;
+  }
+}
+
+/* ============================
+   Bottom Navigation
+   ============================ */
+.step-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 32rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  flex-shrink: 0;
+  border-top: 1rpx solid #f0f0f0;
+
+  .nav-btn {
+    height: 92rpx;
+    border-radius: 46rpx;
+    font-size: 30rpx;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+
+    &::after { border: none; }
+    transition: transform 0.12s ease, opacity 0.12s ease;
+
+    &:active {
+      transform: scale(0.97);
+      opacity: 0.85;
+    }
+
+    &.back {
+      padding: 0 48rpx;
+      background: #f5f5f7;
+      color: #1d1d1f;
+    }
+
+    &.next {
+      padding: 0 64rpx;
+      background: #00A870;
+      color: #fff;
+    }
+
+    &.submit {
+      padding: 0 64rpx;
+      background: #00A870;
+      color: #fff;
+    }
+  }
+}

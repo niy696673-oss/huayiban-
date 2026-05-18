@@ -1,0 +1,28 @@
+<view class="page">
+  <view class="message-container">
+    <scroll-view scroll-y class="message-list" scroll-top="{{scrollTop}}">
+      <view class="message {{item.fromId === 'user' ? 'user' : 'doctor'}}" wx:for="{{messages}}" wx:key="id">
+        <image class="msg-avatar" src="{{item.fromAvatar}}" mode="aspectFill"></image>
+        <view class="msg-content">
+          <text class="msg-name">{{item.fromName}}</text>
+          <view class="msg-bubble">
+            <text class="msg-text" wx:if="{{item.type === 'text'}}">{{item.content}}</text>
+            <image class="msg-image" src="{{item.mediaUrl}}" mode="widthFix" wx:if="{{item.type === 'image'}}" bindtap="onPreviewImage" data-url="{{item.mediaUrl}}"></image>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="input-container">
+    <view class="input-wrapper">
+      <input class="text-input" type="text" placeholder="输入消息..." value="{{inputText}}" bindinput="onInputChange" confirm-type="send" bindfocus="onInputFocus"/>
+      <view class="input-actions">
+        <view class="attach-btn" bindtap="onChooseImage">📷</view>
+        <view class="send-btn {{inputText ? 'active' : ''}}" bindtap="onSendText">
+          <text>发送</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,36 @@
+<view class="page">
+  <view class="header">
+    <text class="header-title">我的医疗团队</text>
+    <text class="header-subtitle">专属医生为您服务</text>
+  </view>
+
+  <!-- Main Doctor Card -->
+  <view class="section-title">主治医生</view>
+  <view class="main-doctor" bindtap="onSelectDoctor">
+    <view class="doctor-avatar-wrap">
+      <image class="doctor-avatar" src="{{doctor.avatarUrl || defaultAvatar}}" mode="aspectFill"></image>
+      <view class="online-badge"></view>
+    </view>
+    <view class="doctor-info">
+      <view class="doctor-name-row">
+        <text class="doctor-name">{{doctor.name}}</text>
+        <text class="doctor-title">{{doctor.title}}</text>
+      </view>
+      <text class="doctor-dept">{{doctor.department}}</text>
+      <text class="doctor-hospital">{{doctor.hospital}}</text>
+    </view>
+    <view class="chat-btn">
+      <text>💬</text>
+    </view>
+  </view>
+
+  <!-- Assistants -->
+  <view class="section-title">医助团队</view>
+  <view class="assistant-grid">
+    <view class="assistant-card" wx:for="{{assistants}}" wx:key="_id" bindtap="onSelectAssistant" data-assistant="{{item}}">
+      <image class="assistant-avatar" src="{{item.avatarUrl || defaultAvatar}}" mode="aspectFill"></image>
+      <text class="assistant-name">{{item.name}}</text>
+      <text class="assistant-role">{{item.title}}</text>
+    </view>
+  </view>
+</view>

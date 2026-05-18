@@ -1,0 +1,188 @@
+.page {
+  height: 100vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 40rpx 48rpx;
+  background: linear-gradient(180deg, #f0faf6 0%, #fff 100%);
+}
+
+.logo-wrap {
+  width: 120rpx;
+  height: 120rpx;
+  background: linear-gradient(135deg, #00A870, #00C48C);
+  border-radius: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24rpx;
+  box-shadow: 0 12rpx 32rpx rgba(0, 168, 112, 0.25);
+}
+
+.logo-icon {
+  width: 60rpx;
+  height: 60rpx;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 12h-4l-3 9L9 3l-3 9H2'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.app-title {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 8rpx;
+}
+
+.app-slogan {
+  font-size: 26rpx;
+  color: #86868b;
+  letter-spacing: 2rpx;
+}
+
+.content {
+  flex: 1;
+  padding: 48rpx 40rpx;
+}
+
+.title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 12rpx;
+  text-align: center;
+}
+
+.subtitle {
+  display: block;
+  font-size: 26rpx;
+  color: #86868b;
+  margin-bottom: 48rpx;
+  text-align: center;
+}
+
+.identity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.identity-card {
+  display: flex;
+  align-items: center;
+  background: #f9fafb;
+  border: 2rpx solid #e8e8ed;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  transition: all 0.25s ease;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &.selected {
+    background: #f0faf6;
+    border-color: #00A870;
+  }
+}
+
+.identity-icon {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 24rpx;
+  background-color: rgba(0, 168, 112, 0.1);
+  margin-right: 24rpx;
+  background-size: 48rpx 48rpx;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+
+  &.icon-patient {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300A870' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
+  }
+
+  &.icon-family {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300A870' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='9' cy='7' r='4'/%3E%3Cpath d='M23 21v-2a4 4 0 0 0-3-3.87'/%3E%3Cpath d='M16 3.13a4 4 0 0 1 0 7.75'/%3E%3C/svg%3E");
+  }
+}
+
+.identity-info {
+  flex: 1;
+  min-width: 0;
+
+  .identity-title {
+    display: block;
+    font-size: 32rpx;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin-bottom: 8rpx;
+  }
+
+  .identity-desc {
+    display: block;
+    font-size: 24rpx;
+    color: #86868b;
+  }
+}
+
+.identity-check {
+  width: 44rpx;
+  height: 44rpx;
+  border: 3rpx solid #d1d1d6;
+  border-radius: 22rpx;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.identity-card.selected .identity-check {
+  background: #00A870;
+  border-color: #00A870;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-size: 24rpx 24rpx;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.bottom-bar {
+  flex-shrink: 0;
+  padding: 24rpx 40rpx;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.confirm-btn {
+  width: 100%;
+  height: 96rpx;
+  background: #00A870;
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  border-radius: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+
+  &::after { border: none; }
+
+  &:active {
+    transform: scale(0.97);
+    opacity: 0.85;
+  }
+
+  &.disabled {
+    background: #c7c7cc;
+    color: #fff;
+    &:active { transform: none; opacity: 1; }
+  }
+}

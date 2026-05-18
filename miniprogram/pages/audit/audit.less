@@ -1,0 +1,196 @@
+.page {
+  min-height: 100vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48rpx;
+}
+
+.status-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ========== Loading Animation ========== */
+.loading-container {
+  position: relative;
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 56rpx;
+}
+
+.pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 4rpx solid #00A870;
+  opacity: 0;
+  animation: pulse 2.4s ease-out infinite;
+
+  &.delay-1 { animation-delay: 0.8s; }
+  &.delay-2 { animation-delay: 1.6s; }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+.pulse-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120rpx;
+  height: 120rpx;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 24rpx rgba(0, 168, 112, 0.2);
+
+  .pulse-icon {
+    width: 56rpx;
+    height: 56rpx;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &.icon-document {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300A870' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3Cline x1='16' y1='13' x2='8' y2='13'/%3E%3Cline x1='16' y1='17' x2='8' y2='17'/%3E%3C/svg%3E");
+    }
+
+    &.icon-clock {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300A870' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpolyline points='12 6 12 12 16 14'/%3E%3C/svg%3E");
+    }
+  }
+}
+
+/* ========== Success ========== */
+.success-container {
+  margin-bottom: 56rpx;
+}
+
+.success-circle {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00A870, #00C48C);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  .success-icon {
+    font-size: 80rpx;
+    color: #fff;
+    font-weight: 300;
+  }
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ========== Error ========== */
+.error-container {
+  margin-bottom: 56rpx;
+}
+
+.error-circle {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff3b30, #ff453a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  .error-icon {
+    font-size: 80rpx;
+    color: #fff;
+    font-weight: 300;
+  }
+}
+
+/* ========== Text ========== */
+.status-title {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 16rpx;
+}
+
+.status-message {
+  font-size: 30rpx;
+  color: #86868b;
+  margin-bottom: 12rpx;
+}
+
+.status-hint {
+  font-size: 26rpx;
+  color: #a1a1a6;
+}
+
+/* ========== Buttons ========== */
+.action-btn {
+  margin-top: 56rpx;
+  min-width: 400rpx;
+  height: 96rpx;
+  border-radius: 48rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+
+  &::after { border: none; }
+  &:active { opacity: 0.8; }
+
+  &.primary {
+    background: linear-gradient(135deg, #00A870, #00C48C);
+    color: #fff;
+    box-shadow: 0 4rpx 20rpx rgba(0, 168, 112, 0.3);
+  }
+
+  &.secondary {
+    background: #f5f5f7;
+    color: #1d1d1f;
+  }
+}
+
+/* ========== QR Code ========== */
+.qrcode-container {
+  margin-top: 48rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qrcode-image {
+  width: 400rpx;
+  height: 400rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.qrcode-hint {
+  margin-top: 24rpx;
+  font-size: 28rpx;
+  color: #86868b;
+}

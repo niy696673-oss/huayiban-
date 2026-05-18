@@ -1,0 +1,31 @@
+<view class="page">
+  <view class="status-display">
+    <block wx:if="{{status === 'pending'}}">
+      <view class="loading-container">
+        <view class="pulse-ring"></view>
+        <view class="pulse-ring delay-1"></view>
+        <view class="pulse-ring delay-2"></view>
+        <view class="pulse-center">
+          <view class="pulse-icon icon-document"></view>
+        </view>
+      </view>
+      <text class="status-title">资料审核中</text>
+      <text class="status-message">您的资料正在审核中</text>
+      <text class="status-hint">审核结果将在1-3个工作日内完成</text>
+    </block>
+    
+    <block wx:elif="{{status === 'approved'}}">
+      <view class="success-container">
+        <view class="success-circle">
+          <text class="success-icon">✓</text>
+        </view>
+      </view>
+      <text class="status-title">审核通过</text>
+      <text class="status-message">欢迎加入邱医生专属诊疗群</text>
+      <view class="qrcode-container">
+        <image class="qrcode-image" src="/images/加入群聊二维码.png" mode="aspectFit" />
+        <text class="qrcode-hint">长按识别二维码</text>
+      </view>
+    </block>
+  </view>
+</view>
